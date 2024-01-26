@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => init_UI());
 
+const svgns = "http://www.w3.org/2000/svg";
+const viewPortMaxUnitX = 1000;
+const viewPortMaxUnitY = 1000;
+let viewport;
+
 function insertViewPort(containerId) {
     viewport = document.createElementNS(svgns, "svg");
     viewport.setAttribute("id", "viewport");
@@ -9,15 +14,9 @@ function insertViewPort(containerId) {
 
 function init_UI() {
     insertViewPort("graphContainer");
-    render
+    demoShapes();
 }
 
-function insertViewPort(containerId) {
-    viewport = document.createElementNS(svgns, "svg");
-    viewport.setAttribute("id", "viewport");
-    viewport.setAttribute("viewBox", "0 0 " + viewPortMaxUnitX + " " + viewPortMaxUnitY);
-    document.getElementById(containerId).appendChild(viewport);
-}
 function demoShapes() {
     viewport.appendChild(line(20, 20, 400, 200, 'green', 15))
     viewport.appendChild(line(20, 20, 400, 150, 'red', 15))
@@ -31,6 +30,7 @@ function demoShapes() {
         viewport.appendChild(text(220, 400, 'Bonjour', angle, 4, `rgb(${gray}, ${gray}, ${gray})`))
     }
 }
+
 function line(x1, y1, x2, y2, stroke = "black", strokeWidth = 1) {
     let line = document.createElementNS(svgns, "line");
     line.setAttribute("x1", x1); line.setAttribute("y1", y1);
@@ -39,6 +39,7 @@ function line(x1, y1, x2, y2, stroke = "black", strokeWidth = 1) {
     line.setAttribute("stroke-width", strokeWidth);
     return line;
 }
+
 function rect(x, y, width, height, fill = "white", stroke = "black", strokeWidth = 1) {
     let rect = document.createElementNS(svgns, "rect");
     rect.setAttribute("x", x); rect.setAttribute("y", y);
